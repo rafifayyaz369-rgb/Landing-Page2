@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Building Myself. Understanding Systems. Creating Opportunities.</title>
+
+<meta name="description" content="A personal portfolio on entrepreneurship, systems thinking, business operations and continuous self-development.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{--bg:#050505;--ch:#111;--fg:#fff;--mu:#888;--line:rgba(255,255,255,.12);--serif:"Geist",system-ui,sans-serif;--sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.2,.8,.2,1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+*,*::before,*::after{box-sizing:inherit}
+
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg);color-scheme:dark}
+
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+a{color:inherit;text-decoration:none}
+
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:4px}
+
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+
+h1,h2,h3{font-family:var(--sans);font-weight:500;margin:0;line-height:1.08;letter-spacing:-.03em}h1,h2{font-weight:600}
+
+h2{font-size:clamp(2.2rem,5.5vw,4rem)}
+
+p{margin:0}
+
+.mu{color:var(--mu)}
+
+section{padding:clamp(5rem,12vw,9rem) 0;position:relative}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+
+
+/* cursor + glow */
+
+#cur{position:fixed;left:0;top:0;width:20px;height:20px;pointer-events:none;z-index:100;opacity:0;transition:opacity .25s;will-change:transform}
+
+#cur.on{opacity:1}#cur svg{display:block;transform-origin:1px 1px;transition:transform .25s var(--ease),filter .25s;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+
+#cur.hov svg{transform:scale(1.14) rotate(-6deg);filter:drop-shadow(0 0 4px rgba(255,255,255,.55))}#cur.down svg{transform:scale(.9)}
+
+@media (pointer:fine){html.cur,html.cur a,html.cur button{cursor:none}}
+
+
+
+/* nav */
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(1rem + env(safe-area-inset-top,0px)) 0 1rem;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+
+nav.s{background:rgba(5,5,5,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+
+.logo{font-weight:600;font-size:1.05rem;letter-spacing:.14em}
+
+.links{display:flex;gap:.3rem}
+
+.links a{position:relative;padding:.45rem .8rem;font-size:.9rem;color:var(--mu);transition:color .3s;border-radius:99px}
+
+.links a::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:.2rem;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+
+.links a:hover,.links a.act{color:#fff}.links a:hover::after,.links a.act::after{transform:scaleX(1)}
+
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;place-items:center}
+
+.burger i{display:block;width:16px;height:1px;background:#fff;box-shadow:0 5px #fff;transform:translateY(-2.5px);transition:.3s}
+
+@media(max-width:760px){.burger{display:grid}.links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;align-items:center;gap:1rem;opacity:0;pointer-events:none;transition:opacity .35s}
+
+.links a{font:400 2.4rem var(--serif);color:#fff}.links.open{opacity:1;pointer-events:auto}nav .burger{position:relative;z-index:60}}
+
+
+
+/* buttons */
+
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.6rem;border-radius:99px;border:1px solid var(--line);font-size:.95rem;font-weight:400;transition:background .3s,color .3s,border-color .3s,transform .25s var(--ease);will-change:transform}
+
+.btn.p{background:#fff;color:#050505;border-color:#fff}
+
+.btn:hover{border-color:#fff}.btn.p:hover{background:#e8e8e8}.btn:not(.p):hover{background:rgba(255,255,255,.08)}
+
+.btn:active{transform:scale(.96)!important}
+
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}.btn:hover svg{transform:translate(3px,0)}
+
+
+
+/* hero */
+
+#hero{padding:6.5rem 0 3.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}
+
+.hero-in{display:flex;flex-direction:column;align-items:center}
+
+.id{display:flex;flex-direction:column;align-items:center;gap:.9rem;opacity:0;transform:translateY(12px);animation:idin 1s .1s var(--ease) forwards}
+
+@keyframes idin{to{opacity:1;transform:none}}
+
+.av{width:80px;height:80px;border-radius:50%;padding:3px;border:1px solid var(--line);box-shadow:0 0 0 6px rgba(255,255,255,.04);display:grid;place-items:center;font-weight:500;font-size:1.15rem;letter-spacing:.08em;color:var(--mu);overflow:hidden}
+
+.av img{width:100%;height:100%;object-fit:cover;border-radius:50%;filter:grayscale(1) contrast(1.05)}
+
+.nm{font-size:.8rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+
+.rl{font-size:.85rem;color:var(--mu);margin-top:-.4rem}
+
+#hero h1{font-size:clamp(2.1rem,7.2vw,5.6rem);font-weight:600;letter-spacing:-.045em;line-height:1;text-wrap:balance;margin:2rem 0 0}
+
+#hero h1 span{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.06em}
+
+#hero h1 em{display:block;font-style:normal;transform:translateY(110%);animation:up 1.1s var(--ease) forwards}
+
+#hero h1 span:nth-child(2) em{animation-delay:.12s}#hero h1 span:nth-child(3) em{animation-delay:.24s}
+
+@keyframes up{to{transform:none}}
+
+@keyframes fade{to{opacity:1}}
+
+.sw{width:min(92vw,700px,80vh);aspect-ratio:1;margin:-.5rem auto -1.5rem;opacity:0;animation:fade 1.6s .5s forwards}
+
+#sphere{display:block;width:100%;height:100%}
+
+.sub{max-width:32rem;color:#c9c9c9;font-size:clamp(1.02rem,2vw,1.2rem);margin:0 auto 2rem;padding-inline:1.25rem;opacity:0;animation:fade 1s .9s forwards}
+
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;opacity:0;animation:fade 1s 1.05s forwards}
+
+.lg{width:60px;height:60px;border-radius:16px;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.03);display:grid;place-items:center;margin-bottom:1.3rem;color:var(--mu);font-size:.85rem;font-weight:500;letter-spacing:.1em;overflow:hidden}
+
+.lg.has{border-style:solid;border-color:var(--line)}.lg img{width:100%;height:100%;object-fit:contain;padding:9px;filter:grayscale(1) brightness(1.15)}
+
+.fg{grid-column:1/-1;margin:0;border-radius:14px;overflow:hidden;aspect-ratio:21/9;background:var(--ch)}
+
+.fg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s var(--ease),filter .6s}.card:hover .fg img{transform:scale(1.05);filter:grayscale(.2)}
+
+
+
+/* about */
+
+.about{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(2rem,6vw,6rem)}
+
+.about p+p{margin-top:1.3rem}.about p{font-size:1.15rem;color:#cfcfcf;max-width:38rem}
+
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+
+.tags span{border:1px solid var(--line);border-radius:99px;padding:.35rem .9rem;font-size:.85rem;color:var(--mu);transition:.3s}
+
+.tags span:hover{color:#fff;border-color:#fff}
+
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+
+
+
+/* experience */
+
+.head{margin-bottom:clamp(2.5rem,6vw,4.5rem);max-width:40rem}.head p{margin-top:1rem;color:var(--mu)}
+
+.xp{border-top:1px solid var(--line)}
+
+.card{border-bottom:1px solid var(--line);position:relative;transition:background .4s}
+
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:#fff;transform:scaleY(0);transition:transform .5s var(--ease)}
+
+.card:hover,.card.o{background:linear-gradient(90deg,rgba(255,255,255,.035),transparent 70%)}
+
+.card.o::before,.card:hover::before{transform:scaleY(1)}
+
+.ch{width:100%;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;text-align:left;padding:1.8rem 1rem 1.8rem 1.4rem}
+
+.ch h3{font-size:clamp(1.7rem,3.6vw,2.6rem);transition:transform .5s var(--ease)}.card:hover .ch h3{transform:translateX(8px)}
+
+.ch small{display:block;margin-top:.5rem;font-size:.92rem;color:var(--mu);max-width:36rem;font-weight:300}
+
+.pm{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.4s var(--ease)}
+
+.pm svg{width:16px;height:16px;transition:transform .5s var(--ease)}
+
+.card.o .pm{background:#fff;color:#050505}.card.o .pm svg{transform:rotate(45deg)}
+
+.pn{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}.card.o .pn{grid-template-rows:1fr}
+
+.pn>div{overflow:hidden}
+
+.pi{padding:0 1rem 2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;opacity:0;transform:translateY(10px);transition:opacity .5s .1s,transform .6s .1s var(--ease)}
+
+.card.o .pi{opacity:1;transform:none}
+
+.pi h4{margin:0 0 .8rem;font:400 .9rem var(--sans);color:var(--mu)}
+
+.pi ul{margin:0;padding:0;list-style:none}.pi li{padding:.55rem 0;border-top:1px solid var(--line);color:#d6d6d6;font-size:.98rem}
+
+.pi li:last-child{border-bottom:1px solid var(--line)}
+
+@media(max-width:760px){.pi{grid-template-columns:1fr;gap:1.4rem}.ch{padding-left:1rem}}
+
+
+
+/* education */
+
+.tl{position:relative;padding-left:2.4rem}
+
+.tl::before,.tl .fill{content:"";position:absolute;left:7px;top:.4rem;bottom:.4rem;width:1px;background:var(--line)}
+
+.tl .fill{background:#fff;bottom:auto;height:0;transition:height .15s linear}
+
+.step{position:relative;padding-bottom:clamp(3rem,8vw,5.5rem);opacity:.35;transition:opacity .7s var(--ease),transform .7s var(--ease);transform:translateX(14px)}
+
+.step:last-child{padding-bottom:0}
+
+.step.in{opacity:1;transform:none}
+
+.step::before{content:"";position:absolute;left:-2.4rem;top:.7rem;width:15px;height:15px;border-radius:50%;background:var(--bg);border:1px solid var(--mu);transition:.5s var(--ease)}
+
+.step.in::before{background:#fff;border-color:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.12)}
+
+.step h3{font-size:clamp(2rem,4.5vw,3.2rem)}.step .role{margin:.6rem 0 1.1rem;color:var(--mu)}
+
+.step blockquote{margin:0;max-width:40rem;font-family:var(--serif);font-size:clamp(1.25rem,2.4vw,1.65rem);line-height:1.35;color:#dcdcdc}
+
+
+
+/* pillars */
+
+.pl{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+
+.pl article{background:var(--bg);padding:2rem 1.5rem 2.4rem;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;transition:background .5s;position:relative;overflow:hidden}
+
+.pl article:hover{background:var(--ch)}
+
+.pl svg{width:30px;height:30px;stroke-width:1.2;transition:transform .6s var(--ease)}.pl article:hover svg{transform:translateY(-6px) rotate(-6deg)}
+
+.pl h3{font-size:1.9rem;margin:2.5rem 0 .8rem}.pl p{color:var(--mu);font-size:.98rem}
+
+@media(max-width:980px){.pl{grid-template-columns:1fr 1fr}}@media(max-width:560px){.pl{grid-template-columns:1fr}.pl article{min-height:0}}
+
+
+
+/* closing */
+
+#closing{text-align:center;padding-bottom:6rem;overflow:hidden}
+
+#closing blockquote{margin:0 auto 3rem;max-width:18ch;font:600 clamp(2.2rem,6.4vw,5rem)/1.06 var(--serif);letter-spacing:-.04em;text-wrap:balance;max-width:16ch}
+
+footer{border-top:1px solid var(--line);padding:1.6rem 0;color:var(--mu);font-size:.85rem}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+
+
+/* reveal */
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.rv.in{opacity:1;transform:none}
+
+.toast{position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,20px);background:#fff;color:#050505;padding:.7rem 1.2rem;border-radius:99px;font-size:.9rem;opacity:0;pointer-events:none;transition:.4s var(--ease);z-index:90}.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}.rv,.step{opacity:1;transform:none}#hero h1 em{transform:none}.sub,.cta,.id,.sw{opacity:1;transform:none}}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="cur" aria-hidden="true"><svg viewBox="0 0 20 20" width="20" height="20"><defs><linearGradient id="sh" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="20" y2="20"><stop offset="0" stop-color="#7d7d7d"/><stop offset=".32" stop-color="#f4f4f4"/><stop offset=".46" stop-color="#b8b8b8"/><stop offset=".62" stop-color="#fff"/><stop offset="1" stop-color="#8c8c8c"/></linearGradient></defs><path d="M1 1v15.2l4.1-3.7 2.7 6.2 2.6-1.1-2.6-6h5.7z" fill="url(#sh)" stroke="#050505" stroke-width=".9" stroke-linejoin="round"/></svg></div>
+
+
+
+<nav id="nav"><div class="wrap">
+
+  <a href="#hero" class="logo" aria-label="Rafi Fayyaz Herunawan, back to top">RFH</a>
+
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i></button>
+
+  <div class="links" id="links">
+
+    <a href="#about">About</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#development">Development</a><a href="#closing">Contact</a>
+
+  </div>
+
+</div></nav>
+
+
+
+<main>
+
+<section id="hero" aria-label="Introduction">
+
+  <div class="wrap hero-in" id="heroin">
+
+    <div class="id"><div class="av" id="av">RFH</div><p class="nm" data-name>Rafi Fayyaz Herunawan</p><p class="rl">Personal Portfolio / Entrepreneurial Journey</p></div>
+
+    <h1><span><em>Building Myself.</em></span><span><em>Understanding Systems.</em></span><span><em>Creating Opportunities.</em></span></h1></div>
+
+  <div class="sw"><canvas id="sphere" aria-hidden="true"></canvas></div>
+
+  <p class="sub">An evolving journey through entrepreneurship, technology, business operations, and continuous self-development.</p>
+
+  <div class="cta">
+
+      <a class="btn p" data-mag href="#experience">Explore My Journey <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+
+      <a class="btn" data-mag href="#closing">Get In Touch</a>
+
+    </div>
+
+</section>
+
+
+
+<section id="about"><div class="wrap about">
+
+  <h2 class="rv">Learning how things work, then building on it.</h2>
+
+  <div class="rv">
+
+    <p>My path has crossed offices, digital marketplaces, the road, and online products. Each environment worked by different rules, and each one taught me how a system really runs: who it serves, what keeps it moving, and where it breaks.</p>
+
+    <p>I treat every role as a place to learn. Administration gave me discipline and process. Trading gave me a feel for markets and trust. Driving gave me patience with people. Selling digital products tied it together into a view of how a small business operates end to end.</p>
+
+    <p>I am now focused on turning that range into something I build on purpose, with technology and entrepreneurship at the center.</p>
+
+    <div class="tags"><span>Personal development</span><span>Entrepreneurial mindset</span><span>Adaptability</span><span>Systems thinking</span><span>Business exploration</span><span>Continuous learning</span></div>
+
+  </div>
+
+</div></section>
+
+
+
+<section id="experience"><div class="wrap">
+
+  <div class="head rv"><h2>Experience</h2><p>Five environments, five lessons in how systems and people work. Select any one to see what it taught me.</p></div>
+
+  <div class="xp rv" id="xp"></div>
+
+</div></section>
+
+
+
+<section id="education"><div class="wrap">
+
+  <div class="head rv"><h2>Education Journey</h2><p>Three stages that shaped how I think, work with others, and take responsibility.</p></div>
+
+  <div class="tl" id="tl"><div class="fill" id="fill"></div>
+
+    <div class="step"><div class="lg" data-k="annida" data-alt="SD IT Annida">AN</div><h3>SD IT Annida</h3><p class="role">An early foundation in character and social skills</p><blockquote>An early foundation in character development, social interaction, and essential learning. This stage shaped the fundamentals of communication, discipline, and relationship building.</blockquote></div>
+
+    <div class="step"><div class="lg" data-k="albinaa" data-alt="SMP Al Binaa">AB</div><h3>SMP Al Binaa</h3><p class="role">Islamic boarding school: independence and leadership</p><blockquote>An important chapter in developing independence, leadership, discipline, and adaptability. Living within a structured boarding school environment provided valuable lessons in responsibility, collaboration, and self-management.</blockquote></div>
+
+    <div class="step"><div class="lg" data-k="alazhar" data-alt="SMA Al Azhar">AZ</div><h3>SMA Al Azhar 22</h3><p class="role">Exploring business, opportunity, and mindset</p><blockquote>A period of broader exploration, developing an understanding of different business models, opportunities, and future possibilities. This stage encouraged critical thinking and a deeper interest in entrepreneurship and personal development.</blockquote></div>
+
+  </div>
+
+</div></section>
+
+
+
+<section id="development"><div class="wrap">
+
+  <div class="head rv"><h2>Four principles I build on</h2></div>
+
+  <div class="pl rv">
+
+    <article><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg><div><h3>Adaptability</h3><p>Adjusting to new environments and challenges without losing focus.</p></div></article>
+
+    <article><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8M18 8l-5 8"/></svg><div><h3>Systems Thinking</h3><p>Seeing how processes, people, technology, and results connect.</p></div></article>
+
+    <article><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V10l8-6 8 6v10zM9 20v-6h6v6"/></svg><div><h3>Entrepreneurship</h3><p>Reading opportunities, business models, and markets to create value.</p></div></article>
+
+    <article><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg><div><h3>Continuous Learning</h3><p>Learning, reviewing, and improving every skill, again and again.</p></div></article>
+
+  </div>
+
+</div></section>
+
+
+
+<section id="closing"><div class="wrap">
+
+  <blockquote class="rv">Growth is not a destination. It’s a system built through experience, discipline, and continuous improvement.</blockquote>
+
+  <a class="btn p rv" data-mag id="contact" href="mailto:hello@example.com">Contact Me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+
+</div></section>
+
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> <span data-name>Your Name</span></span><a href="#hero">Back to top</a></div></footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+
+
+<script>
+
+/* ===== Edit these ===== */
+
+var NAME="Rafi Fayyaz Herunawan", EMAIL="YOUR_EMAIL@example.com";
+
+var PHOTO="assets/rafi.jpg"; /* Replace with your own portrait file if needed */
+
+var LOGOS={annida:"",albinaa:"assets/albinaa.png",alazhar:"assets/alazhar.png"}; /* SD IT Annida logo not supplied */
+
+var XIMG={0:"",1:"assets/blue-gem-lock.png",2:"assets/roblox.png",3:"assets/grab.png",4:"assets/rdp.png"}; /* optional experience visuals, by card order */
+
+/* ===================== */
+
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches, FINE=matchMedia("(pointer:fine)").matches;
+
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+
+$$("[data-name]").forEach(function(e){e.textContent=NAME});$("#contact").href="mailto:"+EMAIL;$("#yr").textContent=new Date().getFullYear();
+
+if(PHOTO)$("#av").innerHTML='<img src="'+PHOTO+'" alt="Portrait of '+NAME+'">';
+
+$$(".lg").forEach(function(e){var u=LOGOS[e.dataset.k];if(u){e.classList.add("has");e.innerHTML='<img src="'+u+'" alt="'+e.dataset.alt+' logo">'}});
+
+
+
+var XP=[
+
+["Administrative","PT Unggul Trijaya","Administrative work inside a company environment, seeing how an organization runs day to day.",["Understood company administrative processes","Learned workflow and operational coordination","Built accuracy, responsibility, and discipline"],["Systems and procedures keep an organization reliable","Small details protect the whole workflow"]],
+
+["Diamond Lock Trading","Growtopia ecosystem","Buying and selling Diamond Lock inside the Growtopia economy.",["Completed digital transactions","Learned supply, demand, and market dynamics","Practiced negotiation and transaction management"],["Trust is the real currency in any trade","Prices move with people’s behavior"]],
+
+["Roblox Trading","Virtual goods and digital assets","Trading products and assets inside the Roblox ecosystem.",["Understood virtual goods markets","Studied digital consumer behavior","Developed transaction and negotiation skills"],["Value inside a digital ecosystem is set by its community","Knowing the buyer matters as much as knowing the product"]],
+
+["GrabCar Driver","Ride-hailing platform","Working as a GrabCar driver on a digital service platform.",["Interacted with many types of customers","Strengthened communication and interpersonal skills","Practiced time management and responsibility"],["Good service is built one interaction at a time","A platform’s operations are shaped by the people on both ends"]],
+
+["Digital Product Business","RDP, proxy, VPN, APK licenses and more","Selling digital products and services to a range of customers.",["Learned how digital product business models work","Managed transactions and customer service","Studied how digital products are distributed"],["Technology can be turned into a business","Reliable support is part of the product"]]];
+
+var xp=$("#xp");
+
+XP.forEach(function(d,i){var c=document.createElement("div");c.className="card";
+
+c.innerHTML='<button class="ch" aria-expanded="false" aria-controls="p'+i+'" id="b'+i+'" data-hov><span><h3>'+d[0]+'</h3><small>'+d[1]+' · '+d[2]+'</small></span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="pn" id="p'+i+'" role="region" aria-labelledby="b'+i+'"><div><div class="pi">'+(XIMG[i]?'<figure class="fg"><img src="'+XIMG[i]+'" alt="'+d[0]+'" loading="lazy"></figure>':'')+'<div><h4>What I did and learned</h4><ul>'+d[3].map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div><div><h4>What it taught me</h4><ul>'+d[4].map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul></div></div></div></div>';
+
+xp.appendChild(c);var b=$("button",c);
+
+b.addEventListener("click",function(){var o=!c.classList.contains("o");$$(".card.o").forEach(function(x){if(x!==c){x.classList.remove("o");$("button",x).setAttribute("aria-expanded","false")}});c.classList.toggle("o",o);b.setAttribute("aria-expanded",o)})});
+
+
+
+/* reveal */
+
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+
+$$(".rv,.step").forEach(function(e){io.observe(e)});
+
+
+
+/* nav */
+
+var nav=$("#nav"),links=$("#links"),bg=$("#burger");
+
+bg.addEventListener("click",function(){var o=links.classList.toggle("open");bg.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":""});
+
+$$("a",links).forEach(function(a){a.addEventListener("click",function(){links.classList.remove("open");bg.setAttribute("aria-expanded","false");document.body.style.overflow=""})});
+
+var secs=$$("main section"),tl=$("#tl"),fill=$("#fill");
+
+function onScroll(){nav.classList.toggle("s",scrollY>40);var y=scrollY+innerHeight*.35,cur="";secs.forEach(function(s){if(s.offsetTop<=y)cur=s.id});
+
+$$("a",links).forEach(function(a){a.classList.toggle("act",a.getAttribute("href")==="#"+cur)});
+
+var r=tl.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight*.6-r.top)/r.height));fill.style.height=(p*100)+"%";
+
+if(!RM)$("#heroin").style.transform="translateY(-"+Math.min(scrollY,innerHeight)*.1+"px)"}
+
+addEventListener("scroll",onScroll,{passive:true});onScroll();
+
+
+
+/* cursor, glow, magnetic */
+
+var mx=innerWidth/2,my=innerHeight/2,nx=0,ny=0;
+
+if(FINE){var cur=$("#cur"),sh=$("#sh"),shown=0,dirty=0;function paint(){dirty=0;cur.style.transform="translate("+(mx-1)+"px,"+(my-1)+"px)";sh.setAttribute("gradientTransform","translate("+nx*26+" "+ny*26+")")}
+
+addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;cur.classList.add("on");if(!shown){shown=1;document.documentElement.classList.add("cur")}if(!dirty){dirty=1;requestAnimationFrame(paint)}nx=mx/innerWidth-.5;ny=my/innerHeight-.5});
+
+document.addEventListener("mouseleave",function(){cur.classList.remove("on")});
+
+addEventListener("mousedown",function(){cur.classList.add("down")});addEventListener("mouseup",function(){cur.classList.remove("down")});
+
+document.addEventListener("mouseover",function(e){cur.classList.toggle("hov",!!e.target.closest("a,button"))});
+
+if(!RM)$$("[data-mag]").forEach(function(b){b.addEventListener("mousemove",function(e){var r=b.getBoundingClientRect();b.style.transform="translate("+(e.clientX-r.left-r.width/2)*.25+"px,"+(e.clientY-r.top-r.height/2)*.35+"px)"});b.addEventListener("mouseleave",function(){b.style.transform=""})})}
+
+else{addEventListener("mousemove",function(e){nx=e.clientX/innerWidth-.5;ny=e.clientY/innerHeight-.5})}
+
+
+
+/* particle sphere */
+
+(function(){var cv=$("#sphere"),g=cv.getContext("2d"),W,H,D,N=innerWidth<760?1300:2800,P=[],hero=$("#hero"),vis=true,rx=0,ry=0,tx=0,ty=0,ang=0,t0=0,sx=-9999,sy=-9999;
+
+var ga=Math.PI*(3-Math.sqrt(5));
+
+for(var i=0;i<N;i++){var y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),th=ga*i;P.push({x:Math.cos(th)*r,y:y,z:Math.sin(th)*r,ox:0,oy:0,vx:0,vy:0,s:Math.random()*6.28})}
+
+function size(){D=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*D;cv.height=H*D;g.setTransform(D,0,0,D,0,0)}
+
+size();addEventListener("resize",size);
+
+addEventListener("mousemove",function(e){var b=cv.getBoundingClientRect();sx=e.clientX-b.left;sy=e.clientY-b.top},{passive:true});
+
+document.addEventListener("mouseleave",function(){sx=sy=-9999});
+
+addEventListener("touchmove",function(e){var b=cv.getBoundingClientRect(),t=e.touches[0];sx=t.clientX-b.left;sy=t.clientY-b.top},{passive:true});
+
+new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis&&!RM)requestAnimationFrame(draw)}).observe(hero);
+
+function draw(ts){if(!vis)return;var t=ts/1000;
+
+var R=Math.min(W,H)*.42,cx=W/2,cy=H/2;
+
+if(!RM){ang+=.0022;tx=ny*.5;ty=nx*.7;rx+=(tx-rx)*.04;ry+=(ty-ry)*.04}
+
+var a=ang+ry,ca=Math.cos(a),sa=Math.sin(a),b=.35+rx,cb=Math.cos(b),sb=Math.sin(b);
+
+g.clearRect(0,0,W,H);g.fillStyle="#fff";
+
+var rad=R*.28;
+
+for(var i=0;i<N;i++){var p=P[i];
+
+var wob=RM?0:Math.sin(t*1.1+p.s+p.y*4)*.035,k=1+wob;
+
+var x=p.x*k,y=p.y*k,z=p.z*k;
+
+var x1=x*ca+z*sa,z1=-x*sa+z*ca,y1=y*cb-z1*sb,z2=y*sb+z1*cb;
+
+var f=1/(1-z2*.35),px=cx+x1*R*f,py=cy+y1*R*f;
+
+var dx=px+p.ox-sx,dy=py+p.oy-sy,d=Math.sqrt(dx*dx+dy*dy);
+
+if(d<rad&&d>.1){var F=(1-d/rad)*2.2;p.vx+=dx/d*F;p.vy+=dy/d*F}
+
+p.vx+=-p.ox*.06;p.vy+=-p.oy*.06;p.vx*=.86;p.vy*=.86;p.ox+=p.vx;p.oy+=p.vy;
+
+var dep=(z2+1)/2,al=.12+dep*.88,s=(.35+dep*1.15)*(R/300+.5);
+
+g.globalAlpha=al;g.beginPath();g.arc(px+p.ox,py+p.oy,s,0,6.283);g.fill()}
+
+g.globalAlpha=1;if(!RM)requestAnimationFrame(draw)}
+
+requestAnimationFrame(draw)})();
+
+
+
+/* contact feedback */
+
+$("#contact").addEventListener("click",function(){var t=$("#toast");t.textContent="Opening your email app to "+EMAIL;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},2600)});
+
+</script>
+
+</body>
+
+</html>
